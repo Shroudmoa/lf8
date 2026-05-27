@@ -1,0 +1,81 @@
+ArtikelNr;Artikelname;LieferantenNr;KategorieNr;Liefereinheit;Einzelpreis;Lagerbestand;BestellteEinheiten;Mindestbestand;Auslaufartikel
+1;Scan Disk Cruzer Blade 128 GB;1;1;Blister mit 2 Stück;46.00;39;0;10;0
+2;Scan Disk Cruzer Blade 64 GB;1;1;Blister mit 4 Stück;53.00;17;40;25;0
+3;Midi Tower schwarz;1;2;2 Stück;68.00;13;70;25;0
+4;Midi Tower rot Premium;2;2;5 Stück;217.00;53;0;0;0
+5;Sharkoon VG4-Schwarz;2;2;1 Stück;38.00;0;0;0;1
+6;Corsair Graphite Series;3;2;2 Stück;257.00;18;0;10;0
+7;BenQ 21 Zoll;3;7;1 Stück;129.00;15;0;10;0
+8;Themaltake A340;3;2;1 Stück;48.00;6;0;0;0
+9;Maus Basic Kabel 3 Tasten;4;6;5 Stück;24.00;29;0;10;1
+10;Ikura Tablet;4;8;1 Stück;69.00;31;0;0;0
+11;HDMI Kabel 1,5 m;5;4;Karton x 5 Einheiten;21.00;22;30;30;0
+12;HDMI Kabel 2,5 m;5;4;Karton x 5 Einheiten;38.00;86;0;0;0
+13;Samsung Galaxy Tablet A 10,1;6;8;1 Stück;160.00;24;0;5;0
+14;Dell Touch Monitor 19 '';6;7;1 Stück;232.00;35;0;0;0
+15;Viper Raidmax MY;6;2;1 Stück;63.00;39;0;5;0
+16;Seagate 250 GB;7;3;1 Stück;70.00;29;0;10;0
+17;"Bluetooth Maus ""Ranger""";7;6;2 Stück;39.00;0;0;0;1
+18;Samsung;7;8;1 Stück;62.00;42;0;0;0
+19;Western Digital 500 GB;8;3;1 Stück;99.00;25;0;5;0
+20;Western Digital 800 GB;8;3;1 Stück;145.00;40;0;0;0
+21;Western Digital 2 TB;8;3;1 Stück;359.00;3;40;5;0
+22;Razer USB Tastatur;17;5;1 Stück;21.00;104;0;25;0
+23;Sharkoon Skiller PRO;9;5;1 Stück;30.00;61;0;25;0
+24;Intenso Budget Line 8 GB;10;1;Karton mit 10 Stück;34.00;20;0;0;1
+25;Fujitsu 200 GB SD;11;3;1 Stück;259.00;76;0;30;0
+26;HP SD 50 GB;11;3;Karton x 4 Stück;178.00;15;0;0;0
+27;Fujitsu 1 TB;11;3;1 Stück;219.00;49;0;30;0
+28;"ASUS V""""( NE 21,5''";12;7;1 Stück;89.00;26;0;0;1
+29;Microsoft Mouse Wedge;12;6;1 Stück;56.00;0;0;2;1
+30;Lenovo Yoga Tablet Android;13;8;1 Stück;179.00;10;0;15;0
+31;USB Hub 5x USB 2,0;14;4;Blister mit 4 Stück;45.00;0;70;10;0
+32;USB Drucker Kabel;14;4;Karton mit 10 Stück;32.00;9;40;10;0
+33;USB auf Micro USB Kabel;15;4;Karton mit 5 Stück;26.00;112;0;5;0
+34;Toshiba Trans Memory 16 GB;16;1;4 Stück;24.00;111;0;15;0
+35;Intenso USB Flash Mini 8 GB;16;1;2 Stück;18.00;20;0;15;0
+36;Ipad Air 2n 64 GB WiFi;2;8;1 Stück;519.00;112;0;20;0
+37;Ipad Air 2n 64 GB Cellular;2;8;1 Stück;626.00;11;50;25;0
+38;Samsung USB Micro 32 GB;18;1;1 Stück;14.00;17;0;15;0
+39;Kingsten Data 32 GB;18;1;2 Stück;10.00;69;0;5;0
+40;Microsoft Surface Pro 4;2;8;1 Stück;918.00;123;0;30;0
+41;Acer Iconia Tab 10 32 GB;9;8;1 Stück;199.00;85;0;10;0
+42;Samsung Book Cover Keyboard drahtlos;20;5;1 Stück;29.00;26;0;0;1
+43;Mini USB Stick 4 GB;20;1;Karton mit 10 Stück;46.00;17;10;25;0
+44;Aero Cool Syclone II;20;2;1 Stück;105.00;27;0;15;0
+45;Lenovo A10-70;21;8;1 Stück;184.00;5;70;15;0
+46;Lenovo Yoga Tablet Win10;13;8;1 Stück;412.00;95;0;0;0
+47;Budget 200 GB;22;3;1 Stück;36.00;36;0;0;0
+48;Budget 500 GB;22;3;1 Stück;67.00;15;70;25;0
+49;Flash SD 80 GB;23;3;1 Stück;132.00;10;60;15;0
+50;Flash SD 100 GB;23;3;1 Stück;164.00;65;0;30;0
+51;Samsung S22D 21,5 '';24;7;1 Stück;98.00;20;0;10;0
+52;Logitech K120;24;5;1 Stück;14.00;38;0;25;0
+53;Trackpad Wacom Z7;24;6;1 Stück;89.00;2;0;3;1
+54;Dell Pointer Mouse;25;6;1 Stück;17.00;21;0;10;0
+55;Logitech Mouse Wireless;25;6;1 Stück;24.00;115;0;20;0
+56;Logitech G810 Orion Spectrum;26;5;1 Stück;150.00;21;10;30;0
+57;Cherry MX Board 3.0 USB;13;5;1 Stück;61.00;36;0;20;0
+58;TrekStor Surftab Win10;27;8;1 Stück;159.00;62;0;20;0
+59;Microsoft Wireless Adapter;28;4;1 Stück;55.00;79;0;0;0
+60;Plantronics Headset B44;28;4;1 Stück;34.00;19;0;0;0
+61;Rasurbo Basic;29;2;1 Stück;28.00;113;0;25;0
+62;Seagate 750 GB;29;3;1 Stück;176.00;17;0;0;0
+63;Bit Fenix Shinobi Midi;7;2;1 Stück;58.00;24;0;5;0
+64;Cherry Strait Corded;13;5;1 Stück;33.00;22;80;30;0
+65;AeroCool Strike X ONE;2;2;1 Stück;76.00;76;0;0;0
+66;MS Tech Slimline;2;2;1 Stück;30.00;4;100;20;0
+67;USB Key Stick 16 GB;16;1;1 Stück;14.00;52;0;10;0
+68;Seagate 5 TB SCSI;8;3;1 Stück;498.00;6;10;15;0
+69;USB Converter;27;4;Blister 12 Stück;36.00;26;0;15;0
+70;Toshiba Memory 8 GB;7;1;2 Stück;15.00;15;10;30;0
+71;VGA Kabel 1,5 m;15;4;Karton mit 8 Stück;22.00;26;0;0;0
+72;VGA Kabel 3 m;14;4;Karton mit 6 Stück;35.00;14;0;0;0
+73;Medion Lifetab 10,1 16 GB;27;8;1 Stück;145.00;101;0;5;0
+74;LG MP24LF 24 '';4;7;1 Stück;109.00;4;20;5;0
+75;Kingston Data Traveler 8 GB;12;1;1 Stück;8.00;125;0;25;0
+76;Bestrunner USB Stick 4 GB;23;1;Blister mit 4 Stück;18.00;57;0;20;0
+77;MS Tech Desktop;12;2;1 Stück;34.00;32;0;15;0
+78;Nvidia GeForce RTX 10GB;27;9;1 Stück;599.00;5;2;6;0
+79;Nvidia GeForce RTX 3060 Ti 8GB GDDR6;27;9;1 Stück;385.50;7;0;10;0
+80;AMD Radeon RX 6800 16GB GDDR6;25;9;1 Stück;468.90;8;5;10;0
