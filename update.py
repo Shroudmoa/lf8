@@ -14,7 +14,7 @@ from datetime import datetime
 try:
     db = mariadb.connect(
         host="192.168.0.79",
-        user="moa",
+        user="root",
         password="vm",
         database="Heiner_IT"
     )
@@ -239,7 +239,7 @@ class StatistikWindow:
             str(kundenanzahl),
             "Insgesamt",
             "#3498db"
-        ).grid(row=0, column=0, padx=10, pady=10, sticky="nsew
+        ).grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
         # Bestellung-Box
         self.create_stat_box(
             stats_frame,
@@ -471,39 +471,79 @@ class StatistikWindow:
 # ============================================================================
 
 class KundenManager:
-    """
-    Klasse zur Verwaltung von Kundendaten
-    Ermöglicht: Hinzufügen, Löschen, Bearbeiten, Suchen von Kunden
-    """
-    
+
     @staticmethod
-    def add_kunde(vorname, nachname, email, telefon, adresse):
-        """
-        Fügt einen neuen Kunden zur Datenbank hinzu
-        
-        Parameter:
-            vorname: Vorname des Kunden
-            nachname: Nachname des Kunden
-            email: E-Mail-Adresse
-            telefon: Telefonnummer
-            adresse: Adresse
-        
-        Rückgabe:
-            True bei Erfolg, False bei Fehler
-        """
+    def get_all_kunden():
+
         try:
+
             cursor = db.cursor()
+
             cursor.execute("""
-                INSERT INTO kunde (vorname, nachname, email, telefon, adresse)
-                VALUES (?, ?, ?, ?, ?)
-            """, (vorname, nachname, email, telefon, adresse))
-            db.commit()
+                SELECT
+                    KundenCode,
+                    Firma,
+                    Kontaktperson,
+                    Position,
+                    Strasse,
+                    Ort,
+                    Telefon
+                FROM kunde
+                ORDER BY Firma
+            """)
+
+            results = cursor.fetchall()
+
             cursor.close()
-            return True
+
+            return results
+
         except mariadb.Error as e:
-            print(f"Fehler beim Hinzufügen des Kunden: {e}")
-            return False
-    
+
+            print("MariaDB ERROR:", e)
+
+            return []
+
+    @staticmethod
+    def search_kunde(search_term):
+
+        try:
+
+            cursor = db.cursor()
+
+            cursor.execute("""
+                SELECT
+                    KundenCode,
+                    Firma,
+                    Kontaktperson,
+                    Position,
+                    Strasse,
+                    Ort,
+                    Telefon
+                FROM kunde
+                WHERE
+                    Firma LIKE ?
+                    OR Kontaktperson LIKE ?
+                    OR Ort LIKE ?
+                ORDER BY Firma
+            """, (
+                f"%{search_term}%",
+                f"%{search_term}%",
+                f"%{search_term}%"
+            ))
+
+            results = cursor.fetchall()
+
+            cursor.close()
+
+            return results
+
+        except mariadb.Error as e:
+
+            print("MariaDB ERROR:", e)
+
+            return []
+            
     @staticmethod
     def delete_kunde(kunde_id):
         """
@@ -620,85 +660,470 @@ class KundenManager:
 # ============================================================================
 # GUI FÜR KUNDENMANAGEMENT
 # ============================================================================
-
 class KundenWindow:
-    """
-    GUI-Fenster für Kundenmanagement
-    Zeigt Liste, erlaubt Suche, Hinzufügen, Bearbeiten, Löschen
-    """
-    
+
     def __init__(self, root):
-        """Initialisiert das Kunden-Fenster"""
+
         self.root = root
-        self.root.title("Heiner IT-Systems - Kundenmanagement")
-        self.root.geometry("1000x600")
-        self.center_window()
+
+        self.root.title(
+            "Heiner IT-Systems - Kundenmanagement"
+        )
+
+        self.root.geometry("1100x600")
+
         self.selected_kunde = None
+
         self.create_widgets()
+
         self.load_kunden()
-    
-    def center_window(self):
-        """Zentriert das Fenster"""
-        self.root.update_idletasks()
-        width = self.root.winfo_width()
-        height = self.root.winfo_height()
-        x = (self.root.winfo_screenwidth() // 2) - (width // 2)
-        y = (self.root.winfo_screenheight() // 2) - (height // 2)
-        self.root.geometry(f'{width}x{height}+{x}+{y}')
-    
+
+    # =========================================================
+    # GUI
+    # =========================================================
+
     def create_widgets(self):
-        """Erstellt alle GUI-Elemente"""
-        
-        # Header
-        header_frame = tk.Frame(self.root, bg="#2c3e50", height=60)
-        header_frame.pack(fill="x")
-        
-        title_label = tk.Label(
-            header_frame,
+
+        # HEADER
+        header = tk.Frame(
+            self.root,
+            bg="#2c3e50",
+            height=70
+        )
+
+        header.pack(fill="x")
+
+        title = tk.Label(
+            header,
             text="👥 Kundenmanagement",
-            font=("Arial", 16, "bold"),
+            bg="#2c3e50",
             fg="white",
-            bg="#2c3e50"
+            font=("Arial", 18, "bold")
         )
-        title_label.pack(pady=15)
-        
-        # Toolbar mit Suchfeld
-        toolbar_frame = tk.Frame(self.root, bg="#ecf0f1")
-        toolbar_frame.pack(fill="x", padx=10, pady=10)
-        
-        search_label = tk.Label(
-            toolbar_frame,
-            text="Suche:",
-            font=("Arial", 10),
-            bg="#ecf0f1"
-        )
-        search_label.pack(side="left", padx=5)
-        
+
+        title.pack(pady=20)
+
+        # TOOLBAR
+        toolbar = tk.Frame(self.root)
+
+        toolbar.pack(fill="x", padx=10, pady=10)
+
+        tk.Label(
+            toolbar,
+            text="Suche:"
+        ).pack(side="left")
+
         self.search_var = tk.StringVar()
-        self.search_var.trace("w", self.on_search_changed)
-        search_entry = tk.Entry(
-            toolbar_frame,
-            textvariable=self.search_var,
-            width=30,
-            font=("Arial", 10)
+
+        self.search_var.trace_add(
+            "write",
+            self.on_search_changed
         )
-        search_entry.pack(side="left", padx=5)
-        
-        # Button-Frame
-        button_frame = tk.Frame(toolbar_frame, bg="#ecf0f1")
-        button_frame.pack(side="right")
-        
+
+        search_entry = tk.Entry(
+            toolbar,
+            textvariable=self.search_var,
+            width=30
+        )
+
+        search_entry.pack(side="left", padx=10)
+
+        # BUTTONS
         add_button = tk.Button(
-            button_frame,
+            toolbar,
             text="➕ Neu",
             command=self.open_add_window,
             bg="#27ae60",
-            fg="white",
-            font=("Arial", 9),
-            padx=10
+            fg="white"
         )
+
         add_button.pack(side="left", padx=5)
-        
+
         edit_button = tk.Button(
-            button_frame,
-            text="✏️
+            toolbar,
+            text="✏️ Bearbeiten",
+            command=self.open_edit_window,
+            bg="#2980b9",
+            fg="white"
+        )
+
+        edit_button.pack(side="left", padx=5)
+
+        delete_button = tk.Button(
+            toolbar,
+            text="🗑️ Löschen",
+            command=self.delete_selected_kunde,
+            bg="#c0392b",
+            fg="white"
+        )
+
+        delete_button.pack(side="left", padx=5)
+
+        refresh_button = tk.Button(
+            toolbar,
+            text="🔄 Aktualisieren",
+            command=self.load_kunden,
+            bg="#7f8c8d",
+            fg="white"
+        )
+
+        refresh_button.pack(side="left", padx=5)
+
+        # TREEVIEW FRAME
+        tree_frame = tk.Frame(self.root)
+
+        tree_frame.pack(
+            fill="both",
+            expand=True,
+            padx=10,
+            pady=10
+        )
+
+        scrollbar_y = tk.Scrollbar(tree_frame)
+
+        scrollbar_y.pack(
+            side="right",
+            fill="y"
+        )
+
+        columns = (
+    "KundenCode",
+    "Firma",
+    "Kontaktperson",
+    "Position",
+    "Strasse",
+    "Ort",
+    "Telefon"
+)
+
+        self.tree = ttk.Treeview(
+            tree_frame,
+            columns=columns,
+            show="headings",
+            yscrollcommand=scrollbar_y.set
+        )
+
+        scrollbar_y.config(
+            command=self.tree.yview
+        )
+
+        # HEADINGS
+        for col in columns:
+
+            self.tree.heading(
+                col,
+                text=col
+            )
+
+        # COLUMN WIDTHS
+        self.tree.column("KundenCode", width=100)
+        self.tree.column("Firma", width=200)
+        self.tree.column("Kontaktperson", width=150)
+        self.tree.column("Position", width=150)
+        self.tree.column("Strasse", width=250)
+        self.tree.column("Ort", width=150)
+        self.tree.column("Telefon", width=140)
+
+        self.tree.pack(
+            fill="both",
+            expand=True
+        )
+
+        self.tree.bind(
+            "<<TreeviewSelect>>",
+            self.on_tree_select
+        )
+
+    # =========================================================
+    # LOAD CUSTOMERS
+    # =========================================================
+
+    def load_kunden(self):
+
+        print("Loading customers...")
+
+        # CLEAR TREE
+        for item in self.tree.get_children():
+
+            self.tree.delete(item)
+
+        kunden = KundenManager.get_all_kunden()
+
+        print("Kunden:", kunden)
+
+        for kunde in kunden:
+
+            print("INSERT:", kunde)
+
+            self.tree.insert(
+                "",
+                "end",
+                values=kunde
+            )
+
+    # =========================================================
+    # SEARCH
+    # =========================================================
+
+    def on_search_changed(self, *args):
+
+        search_term = self.search_var.get().strip()
+
+        # CLEAR TREE
+        for item in self.tree.get_children():
+
+            self.tree.delete(item)
+
+        # LOAD FILTERED
+        if search_term == "":
+
+            kunden = KundenManager.get_all_kunden()
+
+        else:
+
+            kunden = KundenManager.search_kunde(
+                search_term
+            )
+
+        for kunde in kunden:
+
+            self.tree.insert(
+                "",
+                "end",
+                values=kunde
+            )
+
+    # =========================================================
+    # SELECT
+    # =========================================================
+
+    def on_tree_select(self, event):
+
+        selected = self.tree.selection()
+
+        if selected:
+
+            self.selected_kunde = self.tree.item(
+                selected[0]
+            )["values"]
+
+            print(
+                "Selected:",
+                self.selected_kunde
+            )
+
+    # =========================================================
+    # ADD WINDOW
+    # =========================================================
+
+    def open_add_window(self):
+
+        self.open_kunde_form()
+
+    # =========================================================
+    # EDIT WINDOW
+    # =========================================================
+
+    def open_edit_window(self):
+
+        if not self.selected_kunde:
+
+            messagebox.showwarning(
+                "Warnung",
+                "Bitte zuerst Kunden auswählen!"
+            )
+
+            return
+
+        self.open_kunde_form(edit=True)
+
+    # =========================================================
+    # CUSTOMER FORM
+    # =========================================================
+
+    def open_kunde_form(self, edit=False):
+
+        form = tk.Toplevel(self.root)
+
+        form.geometry("450x400")
+
+        form.title(
+            "Kunde bearbeiten"
+            if edit else
+            "Neuer Kunde"
+        )
+
+        labels = [
+            "Vorname",
+            "Nachname",
+            "Email",
+            "Telefon",
+            "Adresse"
+        ]
+
+        entries = {}
+
+        for index, label in enumerate(labels):
+
+            tk.Label(
+                form,
+                text=label
+            ).grid(
+                row=index,
+                column=0,
+                padx=10,
+                pady=10,
+                sticky="w"
+            )
+
+            entry = tk.Entry(
+                form,
+                width=35
+            )
+
+            entry.grid(
+                row=index,
+                column=1,
+                padx=10,
+                pady=10
+            )
+
+            entries[label] = entry
+
+        # PREFILL
+        if edit and self.selected_kunde:
+
+            (
+                kunde_id,
+                vorname,
+                nachname,
+                email,
+                telefon,
+                adresse
+            ) = self.selected_kunde
+
+            entries["Vorname"].insert(0, vorname)
+            entries["Nachname"].insert(0, nachname)
+            entries["Email"].insert(0, email)
+            entries["Telefon"].insert(0, telefon)
+            entries["Adresse"].insert(0, adresse)
+
+        def save():
+
+            vorname = entries["Vorname"].get()
+            nachname = entries["Nachname"].get()
+            email = entries["Email"].get()
+            telefon = entries["Telefon"].get()
+            adresse = entries["Adresse"].get()
+
+            if edit:
+
+                success = KundenManager.update_kunde(
+                    kunde_id,
+                    vorname,
+                    nachname,
+                    email,
+                    telefon,
+                    adresse
+                )
+
+            else:
+
+                success = KundenManager.add_kunde(
+                    vorname,
+                    nachname,
+                    email,
+                    telefon,
+                    adresse
+                )
+
+            if success:
+
+                messagebox.showinfo(
+                    "Erfolg",
+                    "Kunde gespeichert!"
+                )
+
+                self.load_kunden()
+
+                form.destroy()
+
+            else:
+
+                messagebox.showerror(
+                    "Fehler",
+                    "Speichern fehlgeschlagen!"
+                )
+
+        save_button = tk.Button(
+            form,
+            text="💾 Speichern",
+            command=save,
+            bg="#27ae60",
+            fg="white"
+        )
+
+        save_button.grid(
+            row=10,
+            column=0,
+            columnspan=2,
+            pady=20
+        )
+
+    # =========================================================
+    # DELETE
+    # =========================================================
+
+    def delete_selected_kunde(self):
+
+        if not self.selected_kunde:
+
+            messagebox.showwarning(
+                "Warnung",
+                "Bitte Kunden auswählen!"
+            )
+
+            return
+
+        confirm = messagebox.askyesno(
+            "Bestätigung",
+            "Kunde wirklich löschen?"
+        )
+
+        if confirm:
+
+            kunde_id = self.selected_kunde[0]
+
+            success = KundenManager.delete_kunde(
+                kunde_id
+            )
+
+            if success:
+
+                messagebox.showinfo(
+                    "Erfolg",
+                    "Kunde gelöscht!"
+                )
+
+                self.load_kunden()
+
+            else:
+
+                messagebox.showerror(
+                    "Fehler",
+                    "Löschen fehlgeschlagen!"
+                )
+
+# ============================================================================
+# HAUPTPROGRAMM
+# ============================================================================
+
+if __name__ == "__main__":
+
+    root = tk.Tk()
+
+    app = KundenWindow(root)
+
+    root.mainloop()
+
+    db.close()
