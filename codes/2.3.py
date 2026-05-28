@@ -13,7 +13,7 @@ from datetime import datetime
 
 try:
     db = mariadb.connect(
-        host="192.168.0.79",
+        host="100.125.20.61",
         user="moa",
         password="vm",
         database="Heiner_IT"

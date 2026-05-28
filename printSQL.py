@@ -1,4 +1,4 @@
-##### SQL-Abfrage ausführen und ausgeben #####
+##### SQL-Abfrage ausführen und ausgeben 1.2#####
 
 import mariadb
 import sys
@@ -6,7 +6,7 @@ import sys
 # Verbindung zur Datenbank
 try:
     db = mariadb.connect(
-        host="192.168.0.79",
+        host="100.125.20.61",
         user="root",
         password="vm",
         database="Heiner_IT"

@@ -1,5 +1,4 @@
-##### Verbindung zur Datenbank herstellen #####
-
+##### Verbindung zur Datenbank herstellen 1.1 #####
 import mariadb
 import sys
 
@@ -35,10 +34,10 @@ def testConnection(dbc):  # dbc steht für die Datenbankverbindung die überprü
         cursor.close()  # Schließe den Cursor
         
         if result:
-            print("✓ Datenbankverbindung erfolgreich!")
+            print("Datenbankverbindung erfolgreich!")
             return "successful"
         else:
-            print("✗ Datenbankverbindung fehlgeschlagen!")
+            print("Datenbankverbindung fehlgeschlagen!")
             return "failed"
     except mariadb.Error as e:
         print(f"✗ Fehler: {e}")
