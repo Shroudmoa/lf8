@@ -3,3 +3,4 @@
 2026-05-28 12:02:39.009925 | Geschäftsführung | LOGIN FAIL
 2026-05-28 12:02:51.828445 | Lager | LOGIN FAIL
 2026-05-28 12:03:09.378003 | Geschäftsführung | LOGIN OK
+2026-05-29 08:54:52.260310 | Geschäftsführung | LOGIN OK

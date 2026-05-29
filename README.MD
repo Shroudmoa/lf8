@@ -56,7 +56,7 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 1. Verbindung der DB (1.1)
    ─────────────────────────
    Hürde: Server-IP und Passwort korrekt eingeben
-   Lösung: Überprüfung der Credentials (100.125.20.61, root, vm, Heiner_IT)
+   Lösung: Überprüfung der Credentials (10.145.240.127, root, 123, Heiner_IT)
 
 2. SPALTENNAMEN (1.2)
    ──────────────────────────────────
@@ -109,9 +109,9 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 # SERVER-KONFIGURATION als DOKU:
 
 
-Host: 100.125.20.61
+Host: 10.145.240.127
 User: root
-Passwort: vm
+Passwort: 123
 Datenbank: Heiner_IT
 Typ: MariaDB
 

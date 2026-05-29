@@ -6,9 +6,9 @@ import sys
 # - Verbindung zur Datenbank mit den angegebenen Parametern herstellen
 try:
     db = mariadb.connect(
-        host="100.125.20.61",        # Server-IP-Adresse
+        host="10.145.240.127",        # Server-IP-Adresse
         user="root",                  # Benutzer
-        password="vm",               # Passwort
+        password="123",               # Passwort
         database="Heiner_IT"         # Datenbankname
     )
 except mariadb.Error as e:

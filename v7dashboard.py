@@ -10,9 +10,9 @@ app.secret_key = "heiner_secret_key" #supersecret btw
 
 # Datenbankverbindung aufbauen
 db = mariadb.connect(
-    host="100.125.20.61",
+    host="10.145.240.127",
     user="root",
-    password="vm",
+    password="123",
     database="Heiner_IT"
 )
 

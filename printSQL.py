@@ -6,9 +6,9 @@ import sys
 # Verbindung zur Datenbank
 try:
     db = mariadb.connect(
-        host="100.125.20.61",
+        host="10.145.240.127",
         user="root",
-        password="vm",
+        password="123",
         database="Heiner_IT"
     )
 except mariadb.Error as e:
