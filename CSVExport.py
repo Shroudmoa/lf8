@@ -18,7 +18,7 @@ except mariadb.Error as e:
 
 # SQL-Abfrage für den Lagerbestand
 sql_bestand = "SELECT * FROM artikel"  # Alle Artikel aus der artikel-Tabelle
-
+# nicht im Einsatzt
 # Funktion zum Exportieren einer Tabelle in CSV
 def tabelle_to_csv(tabelle_name, dbc, output_file="export.csv"):
     """
@@ -45,11 +45,11 @@ def tabelle_to_csv(tabelle_name, dbc, output_file="export.csv"):
             writer.writerow(column_names)  # Schreibe Spaltenköpfe
             writer.writerows(rows)  # Schreibe alle Datenzeilen
         
-        print(f"✓ CSV-Export erfolgreich: {output_file}")
+        print(f"CSV-Export erfolgreich: {output_file}")
         cursor.close()
         
     except mariadb.Error as e:
-        print(f"✗ Fehler beim CSV-Export: {e}")
+        print(f"Fehler beim CSV-Export: {e}")
 
 # Aufruf für den Artikel-Lagerbestand
 tabelle_to_csv("artikel", db, "lagerbestand.csv")

@@ -6,12 +6,13 @@ import sys
 # - Verbindung zur Datenbank mit den angegebenen Parametern herstellen
 try:
     db = mariadb.connect(
-        host="10.145.240.127",        # Server-IP-Adresse
+        host="10.145.240.128",        # Server-IP-Adresse
         user="root",                  # Benutzer
         password="123",               # Passwort
         database="Heiner_IT"         # Datenbankname
     )
 except mariadb.Error as e:
+    #genaue Fehlermeldung wird mit lib-Mariadb gezeigt und Progeramm wird  folglich beendet, wenn etwas mit dem Login nicht funktioniert
     print(f"Error connecting to MariaDB Platform: {e}")
     sys.exit(1)
 
@@ -36,7 +37,7 @@ def testConnection(dbc):  # dbc steht für die Datenbankverbindung die überprü
         if result:
             print("Datenbankverbindung erfolgreich!")
             return "successful"
-        else:
+        else: #wenn man keine gültige resualt bekommt
             print("Datenbankverbindung fehlgeschlagen!")
             return "failed"
     except mariadb.Error as e:

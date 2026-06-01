@@ -6,7 +6,11 @@
 
 
 Als Übersicht:
+
+
 Projekt: Verwaltung und Export der Datenbank in verschiedene Formate
+
+
 Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilungen (Read Write Regeln + Bonus => KundenVerwaltung Web-GUI)
 
 
@@ -55,41 +59,65 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 
 1. Verbindung der DB (1.1)
    ─────────────────────────
-   Hürde: Server-IP und Passwort korrekt eingeben
+   Hürde: Server-IP und Passwort korrekt eingeben (es gab auch ein Problem mit dem User Rechte (root|%) und mariadb lib hatte depend.packagaes die man erst auf der VM installieren sollte)
+   
+
    Lösung: Überprüfung der Credentials (10.145.240.127, root, 123, Heiner_IT)
+
+
 
 2. SPALTENNAMEN (1.2)
    ──────────────────────────────────
    Problem: Spaltenköpfe nicht dynamisch ausgelesen
+   
+
    Hürde: cursor.description verwenden für Metadaten
+   
+
    Lösung: [desc[0] for desc in cursor.description]
    
 
 3. CSV Trennzeichen (1.3)
    ──────────────────────
    Problem: CSV-Datei mit Kommas statt Semikolo
+   
+
    Hurde: Deutsche Excel-Kompatibilität erfordert Semikolon
+   
+
    Lösung: delimiter=';' in csv.writer() (https://docs.python.org/3/library/csv.html)
    
 
 4. tkinterr GUI (1.4)
    ────────────────────────
    Problem: Scrollbar nicht funktionierend
+   
+
    hürde: Korrekte Platzierung und Konfiguration
+   
+
    lösung: Scrollbar mit tree.configure(yscroll=scrollbar.set) verbinden
    
 
 5. XML formatierung (1.5)
    ──────────────────────
    Problem: XML nicht korrekt eingerückt (pretty print)
+   
+
    Hürde: minidom.parseString() nutzen für Formatierung
+   
+
    Lösung: XML mit toprettyxml(indent="  ") formatieren
    
 
 6. HTML (1.6)
    ───────────────────────
    problem: HTML-Tabelle nicht ansehnlich
+
+
    Hürde: CSS-Styling hinzufügen
+   
+
    Lösung: Inline-CSS mit Hover-Effekten und Zebra-Stripes
    
 
@@ -110,19 +138,48 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 
 
 Host: 10.145.240.127
+
+
 User: root
+
+
 Passwort: 123
+
+
 Datenbank: Heiner_IT
+
+
 Typ: MariaDB
+
 
 # DATEIEN UND OUTPUTS ALS DOKU 
 
 
 Generierte Dateien:
+
+
   01_ConnectionTest.py - Verbindungstest 1.1
+
+
   printSQL.py - SQL-Ausgabe 1.2
+  
+
   CSVExport.py - CSV-Export 1.3
+  
+
   GUITabelle.py - Tkinter GUI 1.4
+  
+
   CSVtoXML.py - CSV zu XML Konvertierung 1.5
+  
+
   XMLtoHTML.py - XML zu HTML Konvertierung 1.6
 
+
+  2.1.py  -  Login checker 2.1
+
+
+  2.2.py  -  tkiner based main Progeram 2.2
+
+
+  v7dashbooard.py  -  flaskbased web Gui auf Port 5001 2.3

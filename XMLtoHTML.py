@@ -1,6 +1,6 @@
 ##### XML-Datei als HTML-Webseite darstellen #####
 
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ET #ermöglicht lesen und schreiben von xml.dateien
 
 def xml_to_html(xml_file, html_output_file):
     """
@@ -17,18 +17,18 @@ def xml_to_html(xml_file, html_output_file):
     """
     try:
         # Parse XML-Datei
-        tree = ET.parse(xml_file)
-        root = tree.getroot()
+        tree = ET.parse(xml_file)#einfach geasgt öffnet XML und liest die Datei
+        root = tree.getroot() 
         
         # Ermittle Spaltennamen aus dem ersten Datensatz
-        first_record = root.find('Datensatz')
+        first_record = root.find('Datensatz')#einfach checken ob wir eine XML Datei haben oder nicht
         if first_record is None:
-            print("✗ Keine Datensätze in XML gefunden!")
+            print("Keine Datensätze in XML gefunden!")
             return
         
-        columns = [child.tag for child in first_record]
+        columns = [child.tag for child in first_record] #tags lesen. keine Werte 
         
-        # Erstelle HTML-Struktur
+        # Erstelle HTML-Struktur kann man ja auch weniger schreiben => CSS braucht man ja nicht oder copyright symbol am ENDE
         html_content = """
 <!DOCTYPE html>
 <html lang="de">
@@ -105,22 +105,42 @@ def xml_to_html(xml_file, html_output_file):
         html_content += """        </tbody>
     </table>
     <div class="footer">
-        <p>Generiert von Heiner IT-Systems | © 2026</p>
+        <p>Generiert von Heiner IT-Systems | © 2077</p>
     </div>
 </body>
 </html>
 """
-        
+        """
+        XML => 
+        <Datensatz>
+    <Artikelnummer>1001</Artikelnummer>
+    <Artikel>Notebook</Artikel>
+    <Bestand>15</Bestand>
+        </Datensatz>
+        HTML Kopf => 
+       <tr>
+    <th>Artikelnummer</th>
+    <th>Artikel</th>
+    <th>Bestand</th>
+       </tr>
+
+    ####################################
+    <tr>
+    <td>1001</td>
+    <td>Notebook</td>
+    <td>15</td>
+     </tr>
+        """
         # Schreibe HTML-Datei
         with open(html_output_file, 'w', encoding='utf-8') as f:
             f.write(html_content)
         
-        print(f"✓ HTML-Export erfolgreich: {html_output_file}")
+        print(f"HTML-Export erfolgreich: {html_output_file}")
         
     except FileNotFoundError as e:
-        print(f"✗ Fehler: Datei nicht gefunden - {e}")
+        print(f"Fehler: Datei nicht gefunden - {e}")
     except Exception as e:
-        print(f"✗ Fehler: {e}")
+        print(f"Fehler: {e}")
 
 # Aufruf der Funktion
 xml_to_html("lagerbestand.xml", "lagerbestand.html")
