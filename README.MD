@@ -34,7 +34,7 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 ├─────────┼────────────────────────────────────────────┼──────────┼──────────┤
 │ 1.6     │ Erweiterung: XML zu HTML                   │ 1h       │ 1h       │
 ├─────────┼────────────────────────────────────────────┼──────────┼──────────┤
-│ 1.7     │ Dokumentation                              │ 1h       │ 0,5h     │
+│ 1.7     │ Dokumentation (Readme.md)                  │ 1h       │ 0,5h     │
 ├─────────┼────────────────────────────────────────────┼──────────┼──────────┤
 │ GESAMT  │                                            │ 12h      │ 6h       │
 └─────────┴────────────────────────────────────────────┴──────────┴──────────┘
@@ -59,15 +59,20 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 
 1. Verbindung der DB (1.1)
    ─────────────────────────
+   
+
    Hürde: Server-IP und Passwort korrekt eingeben (es gab auch ein Problem mit dem User Rechte (root|%) und mariadb lib hatte depend.packagaes die man erst auf der VM installieren sollte)
    
 
+   
    Lösung: Überprüfung der Credentials (10.145.240.127, root, 123, Heiner_IT)
 
 
 
 2. SPALTENNAMEN (1.2)
    ──────────────────────────────────
+   
+
    Problem: Spaltenköpfe nicht dynamisch ausgelesen
    
 
@@ -79,6 +84,8 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 
 3. CSV Trennzeichen (1.3)
    ──────────────────────
+   
+
    Problem: CSV-Datei mit Kommas statt Semikolo
    
 
@@ -90,6 +97,8 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 
 4. tkinterr GUI (1.4)
    ────────────────────────
+   
+
    Problem: Scrollbar nicht funktionierend
    
 
@@ -101,6 +110,8 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 
 5. XML formatierung (1.5)
    ──────────────────────
+   
+
    Problem: XML nicht korrekt eingerückt (pretty print)
    
 
@@ -112,6 +123,8 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 
 6. HTML (1.6)
    ───────────────────────
+   
+
    problem: HTML-Tabelle nicht ansehnlich
 
 
@@ -125,14 +138,31 @@ Ziel: Bereitstellung von Daten in XML, CSV und HTML für verschiedene Abteilunge
 
 
 • mariadb: Datenbankverbindung und -abfragen
+
+
 • csv: CSV-Export und -Verarbeitung
+
+
 • xml.etree.ElementTree: XML-Verarbeitung
+
+
 • xml.dom.minidom: XML-Formatierung (Pretty Print)
+
+
 • tkinter: Grafische Benutzeroberfläche
+
+
 • sys: Systemfunktionen (Fehlerbehandlung)
+
+
 • flask: Web-GUI für 2.3
+
+
 • datetime: Datums- und Zeitfunktionen
+
+
 • hashlib: Passwort-Hashing und Sicherheitsfunktionen
+
 
 # SERVER-KONFIGURATION als DOKU:
 
@@ -182,4 +212,4 @@ Generierte Dateien:
   2.2.py  -  tkiner based main Progeram 2.2
 
 
-  v7dashbooard.py  -  flaskbased web Gui auf Port 5001 2.3
+  v7dashbooard.py  -  flaskbased web Gui auf Port(Verwaltung App für GF) 5001 2.3
