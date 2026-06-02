@@ -6,7 +6,7 @@ import sys
 # Verbindung zur Datenbank
 try:
     db = mariadb.connect(
-        host=""10.145.240.127,#100.125.20.61 #root|vm
+        host="10.145.240.127", #100.125.20.61 #root|vm
         user="root",
         password="123",
         database="Heiner_IT"
